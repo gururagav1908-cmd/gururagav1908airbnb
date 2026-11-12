@@ -1,26 +1,33 @@
-airbnbproject:
+deploy_dbt_airbnb:
+  target: dev
   outputs:
     dev:
+      type: snowflake
       account: tlnwyaa-kd72196
-      database: airbnb
-      password: Chennai@199819
-      role: accountadmin
-      schema: dev
-      threads: 4
-      type: snowflake
+
+      # User/password auth
       user: gmadhavan603
+      password: Chennai@199819
+
+      role: accountadmin
+      database: AIRBNB
       warehouse: compute_wh
-  target: dev
-jaffle_shop:
-  outputs:
-    dev:
-      account: jnttdxb-bh34312
-      database: airbnb
-      password: doe
-      role: dbt_developers
-      schema: dev
-      threads: 16
+      # in the future you should switch this schema to use a new environment variable
+      # definitely switch this to your schema though
+      schema: DEV
+      threads: 4
+      client_session_keep_alive: False
+    prod:
       type: snowflake
-      user: dbt_u1
-      warehouse: dbt_warehouse
-  target: dev
+      account: tlnwyaa-kd72196
+
+      # User/password auth
+      user: gmadhavan603
+      password: Chennai@199819
+
+      role: accountadmin
+      database: AIRBNB
+      warehouse: compute_wh
+      schema: PROD
+      threads: 4
+      client_session_keep_alive: False
